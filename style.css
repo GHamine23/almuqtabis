@@ -1,17 +1,10 @@
-@font-face { font-family: "Lotus Lotfi"; font-weight: 400; font-display: swap; src: url(assets/fonts/lotus-lotfi-400.woff2) format("woff2"); ascent-override: 95%; descent-override: 45%; line-gap-override: 0%; size-adjust: 128%; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F, U+00AB, U+00BB, U+2014, U+2026, U+25CC; }
-@font-face { font-family: "Lotus Lotfi"; font-weight: 700; font-display: swap; src: url(assets/fonts/lotus-lotfi-700.woff2) format("woff2"); ascent-override: 95%; descent-override: 45%; line-gap-override: 0%; size-adjust: 128%; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+200C-200F, U+00AB, U+00BB, U+2014, U+2026, U+25CC; }
-@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 400; font-display: swap; src: url(assets/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2"); }
-@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 500; font-display: swap; src: url(assets/fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2) format("woff2"); }
-@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 600; font-display: swap; src: url(assets/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2"); }
-@font-face { font-family: "IBM Plex Sans Arabic"; font-weight: 700; font-display: swap; src: url(assets/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2"); }
-
 /* ألوان: ورق مائل إلى خضرة الزيتون، وذهب القبس */
 :root {
   --bg: #ECEEE3; --surface: #F7F8F2; --surface-2: #E2E6D6; --ink: #1E2318; --ink-2: #4A5142; --ink-3: #767D6B;
   --line: #D5D9C9; --accent: #3F4D2A; --accent-2: #33401F; --accent-soft: #DCE2CA; --on-accent: #F7F8F2;
   --gold: #C08A3E; --gold-soft: #F1DDB8; --arch: #3F4D2A; --flame-in: #3F4D2A;
   --shadow: 0 1px 2px rgba(30, 35, 24, .06), 0 18px 48px -18px rgba(30, 35, 24, .28);
-  --font: "Lotus Lotfi", "IBM Plex Sans Arabic", system-ui, sans-serif; --title: "Lotus Lotfi", "IBM Plex Sans Arabic", serif; --ui: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font: "thmanyah sans", system-ui, sans-serif; --title: "thmanyah serif display", "thmanyah sans", serif; --ui: "thmanyah sans", system-ui, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
   --ease: cubic-bezier(.22, .7, .2, 1); --spring: cubic-bezier(.3, 1.45, .5, 1);
   color-scheme: light;
@@ -35,7 +28,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.9 var(--font); direction: rtl; -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background-color .3s, color .3s; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.85 var(--font); direction: rtl; -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background-color .3s, color .3s; }
 img { max-width: 100%; display: block; height: auto; }
 a { color: var(--accent); }
 p { margin: 0; }
@@ -283,6 +276,8 @@ code.line, .line.copy { display: flex; align-items: center; width: fit-content; 
 .update > i { width: 40px; height: 40px; border-radius: 11px; background: color-mix(in srgb, var(--gold) 18%, transparent); color: var(--gold); font-size: 19px; }
 .update b { display: block; font-size: 17px; }
 .update p { color: var(--ink-2); font-size: 15.5px; }
+.update p + p { margin-top: 6px; }
+.update .small { font-size: 14px; color: var(--ink-3); }
 
 /* أسئلة */
 .faq { padding-top: 40px; }
