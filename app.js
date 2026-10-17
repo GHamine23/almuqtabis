@@ -22,6 +22,7 @@
     puzzle: '<path d="M10 4.5a2 2 0 1 1 4 0V6h3.5a1 1 0 0 1 1 1v3.5h-1.5a2 2 0 1 0 0 4h1.5V18a1 1 0 0 1-1 1H14v-1.5a2 2 0 1 0-4 0V19H6.5a1 1 0 0 1-1-1v-3.5H7a2 2 0 1 0 0-4H5.5V7a1 1 0 0 1 1-1H10z"/>',
     pin: '<path d="M9 4h6l-1 5 3 3v1.5H7V12l3-3zM12 13.5V20"/>',
     refresh: '<path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4h-4"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.5"/>',
   };
   $$('i[data-icon]').forEach((el) => { const p = P[el.dataset.icon]; if (p) el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`; });
 
@@ -47,6 +48,61 @@
     paintTheme();
   });
   paintTheme();
+
+  // ---------- الأدوار الأربعة: مسرح يتنقّل بين المشاهد ----------
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const roleEls = $$('.role'), scenes = $$('.sc'), rolesBox = $('.roles');
+  const DUR = 7000;
+  let cur = 0, timer = 0, visible = true, started = false;
+  const show = (n, byUser) => {
+    cur = n;
+    roleEls.forEach((r, k) => { r.classList.toggle('on', k === n); r.setAttribute('aria-selected', String(k === n)); });
+    scenes.forEach((s) => s.classList.remove('on'));
+    void scenes[n].offsetWidth; // يعيد تشغيل حركة المشهد من أولها
+    scenes[n].classList.add('on');
+    clearTimeout(timer);
+    rolesBox.classList.remove('run'); void rolesBox.offsetWidth;
+    if (reduce || !visible) return;
+    const d = byUser ? DUR * 1.5 : DUR;
+    rolesBox.style.setProperty('--dur', d + 'ms'); rolesBox.classList.add('run');
+    timer = setTimeout(() => show((cur + 1) % scenes.length), d);
+  };
+  roleEls.forEach((r, k) => r.addEventListener('click', () => show(k, true)));
+  rolesBox.addEventListener('keydown', (e) => {
+    const step = e.key === 'ArrowDown' || e.key === 'ArrowLeft' ? 1 : e.key === 'ArrowUp' || e.key === 'ArrowRight' ? -1 : 0;
+    if (!step) return; e.preventDefault();
+    const n = (cur + step + roleEls.length) % roleEls.length; show(n, true); roleEls[n].focus();
+  });
+  const heroIO = new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+    if (visible && started) show(cur); else if (!visible) { clearTimeout(timer); rolesBox.classList.remove('run'); }
+  }, { threshold: 0.25 });
+  heroIO.observe($('#mishkat'));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { clearTimeout(timer); rolesBox.classList.remove('run'); } else if (visible) show(cur); });
+  setTimeout(() => { started = true; show(0); }, reduce ? 0 : 1500);
+
+  // ميلان خفيف للمشكاة مع حركة المؤشّر
+  const mk = $('#mishkat');
+  if (!reduce && matchMedia('(pointer: fine)').matches) {
+    $('.hero').addEventListener('pointermove', (e) => {
+      const r = mk.getBoundingClientRect();
+      const x = (e.clientX - (r.left + r.width / 2)) / r.width, y = (e.clientY - (r.top + r.height / 2)) / r.height;
+      mk.style.setProperty('--ry', (x * 5).toFixed(2) + 'deg'); mk.style.setProperty('--rx', (-y * 4).toFixed(2) + 'deg');
+    });
+    $('.hero').addEventListener('pointerleave', () => { mk.style.setProperty('--ry', '0deg'); mk.style.setProperty('--rx', '0deg'); });
+  }
+
+  // ظهور العناصر عند التمرير، متتابعة
+  const rv = $$('[data-rv]');
+  rv.forEach((el) => { const sib = [...el.parentElement.children].filter((x) => x.hasAttribute('data-rv')); el.style.setProperty('--d', (sib.indexOf(el) * 0.09) + 's'); });
+  const rvIO = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); rvIO.unobserve(e.target); } }), { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+  rv.forEach((el) => rvIO.observe(el));
+
+  // ضوء يتبع المؤشّر على بطاقات المزايا
+  $$('.tile').forEach((t) => t.addEventListener('pointermove', (e) => {
+    const r = t.getBoundingClientRect();
+    t.style.setProperty('--mx', (e.clientX - r.left) + 'px'); t.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
 
   // حدّ الشريط العلوي بعد التمرير
   const top = $('.top');
