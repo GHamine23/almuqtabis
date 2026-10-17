@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>المقتبس — رفيق طالب العلم في المحاضرات</title>
-<meta name="description" content="إضافة لمتصفح كروم تعين طلاب العلم وطلاب البرامج العلمية على الانتفاع بالمحاضرات: اقتباس اللحظات المهمة، والتدوين بجانب المحاضرة، ومتابعة الإنجاز، والنشر.">
+<meta name="description" content="إضافة لمتصفح كروم تعين طلاب العلم وطلاب البرامج العلمية على الانتفاع بالمحاضرات: اقتباس اللحظات المهمّة، والتدوين بجانب المحاضرة، ومتابعة الإنجاز، والنشر.">
 <meta property="og:title" content="المقتبس — رفيق طالب العلم في المحاضرات">
 <meta property="og:description" content="اقتبس، ودوّن، وتابع إنجازك، وانشر ما ينفع — من محاضرات يوتيوب.">
 <meta property="og:image" content="assets/shots/home.webp">
-<meta name="theme-color" content="#4A5A32">
+<meta name="theme-color" content="#3F4D2A">
 <link rel="icon" href="assets/icon.png">
+<link rel="preload" href="assets/fonts/noto-naskh-arabic-arabic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script>try { const t = localStorage.getItem('mqTheme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (_) {}</script>
 </head>
@@ -17,12 +18,13 @@
 
 <header class="top">
   <div class="wrap top-in">
-    <a class="brand" href="#"><img src="assets/mark.svg" alt=""><span>المقتبس</span><em class="beta">تجريبية</em></a>
+    <a class="brand" href="#"><img src="assets/mark.svg" alt=""><span>المقتبس</span></a>
     <nav>
-      <a href="#features">المزايا</a>
+      <a href="#features">ماذا يفعل</a>
       <a href="#install">التثبيت</a>
-      <a class="nav-fb" href="#feedback">اقتراحاتك</a>
+      <a href="#faq">أسئلة</a>
     </nav>
+    <a class="nav-fb" href="#feedback">اقتراحاتك</a>
     <button class="theme-btn" id="themeBtn" type="button" aria-label="المظهر"></button>
   </div>
 </header>
@@ -30,46 +32,65 @@
 <main>
   <section class="hero">
     <div class="wrap hero-in">
-      <div class="hero-t">
-        <p class="kicker">إضافة لمتصفح كروم · مجّانية</p>
-        <h1>رفيق طالب العلم<br>في <span>المحاضرات</span></h1>
-        <p class="lead">المقتبس أداة تعين طلاب العلم وطلاب البرامج العلمية على الانتفاع بما يشاهدونه في يوتيوب: يقتبسون اللحظة المهمّة بضغطة، ويدوّنون بجانب المحاضرة، ويتابعون إنجازهم، وينشرون ما ينفع.</p>
-        <div class="cta">
-          <a class="btn primary" id="dl" href="download/almuqtabis.zip" download>
-            <svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></svg>
-            نزّل المقتبس
-          </a>
-          <a class="btn" href="#install">طريقة التثبيت</a>
-        </div>
-        <p class="note" id="ver">الإصدار 2.1.2 · نسخة تجريبية — ملاحظاتك تصنع الإصدار القادم.</p>
+      <p class="beta-line"><span class="beta">نسخة تجريبية</span><span>إضافة مجّانية لمتصفح كروم</span></p>
+      <h1>رفيق طالب العلم في المحاضرات</h1>
+      <p class="lead">اقتبس اللحظة التي تستوقفك من محاضرات يوتيوب بضغطة، ودوّن بجانبها، وتابع ما أتممته، وانشر ما ينفع.</p>
+      <div class="cta">
+        <a class="btn primary" href="download/almuqtabis.zip" download><i data-icon="download"></i>نزّل المقتبس</a>
+        <a class="btn ghost" href="#install">طريقة التثبيت</a>
       </div>
-      <div class="hero-v">
-        <div class="frame"><img class="only-light" src="assets/shots/home.webp" alt="الصفحة الرئيسية في منصّة المقتبس" loading="eager"><img class="only-dark" src="assets/shots/home-dark.webp" alt="الصفحة الرئيسية في منصّة المقتبس (المظهر الداكن)" loading="lazy"></div>
-        <img class="float" src="assets/shots/ytbar.png" alt="زرّ المقتبس ولوحته تحت محاضرة في يوتيوب">
-      </div>
+      <p class="ver" id="ver"></p>
     </div>
-  </section>
 
-  <section class="quote">
     <div class="wrap">
-      <p>«لعلّي آتيكم منها بقبس»</p>
-      <span>شعار المقتبس مشكاةٌ فيها قبس — جذوة علم تأخذها من كل محاضرة.</span>
+      <figure class="mishkat" id="mishkat">
+        <div class="arch-out"></div>
+        <div class="arch-in">
+          <svg class="flame" viewBox="84 86 86 132" aria-hidden="true">
+            <path class="f1" d="M128 214 C92.3 214 87.2 166.88 106.92 137.12 C120.52 114.8 121.88 102.40 132.08 90 C131.4 107.36 142.28 124.72 154.52 152 C167.1 181.76 158.6 214 128 214 Z"/>
+            <path class="f2" d="M126 214 C110.25 214 108 191.96 116.7 178.04 C122.7 167.6 123.3 161.8 127.8 156 C127.5 164.12 132.3 172.24 137.7 185 C143.25 198.92 139.5 214 126 214 Z"/>
+          </svg>
+          <div class="shot">
+            <img class="only-light" src="assets/shots/home.webp" alt="الصفحة الرئيسية في منصّة المقتبس" width="1440" height="900">
+            <img class="only-dark" src="assets/shots/home-dark.webp" alt="الصفحة الرئيسية في منصّة المقتبس" width="1440" height="900" loading="lazy">
+          </div>
+        </div>
+        <svg class="arch-line" viewBox="0 0 1000 860" preserveAspectRatio="none" aria-hidden="true">
+          <path pathLength="1" d="M1 860V250C1 129 190 94 440 31Q500 6 500 1Q500 6 560 31C810 94 999 129 999 250V860"/>
+        </svg>
+        <figcaption>«لعلّي آتيكم منها بقبس» — شعار المقتبس مشكاةٌ فيها قبس: جذوة علم تأخذها من كل محاضرة.</figcaption>
+      </figure>
     </div>
   </section>
 
   <section id="features" class="sec">
     <div class="wrap">
-      <h2>ماذا يفعل المقتبس؟</h2>
-      <p class="sub">كل ما يحتاجه طالب العلم مع المحاضرة، في مكان واحد وبتصميم هادئ.</p>
-      <div class="grid">
-        <article><i>✂</i><h3>اقتباس بضغطة</h3><p>زرّ في مشغّل يوتيوب أو اختصار من لوحة المفاتيح: يسجّل اللحظة المهمّة مقطعًا بجودته، مع عنوانها ورابطها ووقتها.</p></article>
-        <article><i>✎</i><h3>الدفتر بجانب المحاضرة</h3><p>محرّر عربي يفتح يمين المقطع، يختم كل فقرة بوقتها فتعود إليها بنقرة، ويقبل الصور والعناوين والتظليل.</p></article>
-        <article><i>◉</i><h3>سجلّ الإنجاز</h3><p>أين توقّفت في كل محاضرة، وما أتممته، وتقدّمك في كل سلسلة — وتستورد قائمة تشغيل كاملة لتتابعها.</p></article>
-        <article><i>↻</i><h3>المراجعة</h3><p>يقترح عليك مقتبسات لتراجعها، وفقرات من كنّاشتك لتقرأها، ويعرض مقتبسات كل مادة متتابعة.</p></article>
-        <article><i>▣</i><h3>الاستوديو</h3><p>قصّ بالنص، ترجمة على المقطع، أبعاد الريلز، قوالب وأغلفة، مقدّمة وخاتمة بانتقالات سلسة، وتصدير بجودة عالية.</p></article>
-        <article><i>➤</i><h3>النشر</h3><p>قنوات تليجرام متعدّدة بقوالبها، وتقويم تسحب إليه المقتبسات، وجدولة تُنشر في وقتها ولو كان جهازك مطفأً.</p></article>
-        <article><i>▤</i><h3>الكنّاشة</h3><p>دفاترك ووسومها، وتصديرها مستندات مرتّبة من اليمين لليسار، مع مزامنة اختيارية في درايف.</p></article>
-        <article><i>◐</i><h3>الإحصاءات</h3><p>تقارير دراستك ونشرك، مع نصائح بحسب ما تفعل: ورد يومي، سلسلة أوشكت على إتمامها، مقتبسات تنتظر المراجعة.</p></article>
+      <h2>مع المحاضرة، من أوّلها إلى ما بعدها</h2>
+      <div class="moments">
+        <article class="moment">
+          <h3>أثناء المشاهدة</h3>
+          <ul>
+            <li><i data-icon="scissors"></i><div><b>اقتبس بضغطة</b><span>زرّ بجانب «أعجبني» أو اختصار من لوحة المفاتيح، فيُحفظ المقطع بجودته ومعه عنوانه ورابطه ووقته.</span></div></li>
+            <li><i data-icon="notebook"></i><div><b>دوّن بجانب المحاضرة</b><span>دفتر عربي يفتح يمين المقطع، ويختم كل فقرة بوقتها فتعود إليها بنقرة.</span></div></li>
+            <li><i data-icon="focus"></i><div><b>وضع التركيز</b><span>يخفي ما حول المحاضرة، فلا يبقى إلا هي ودفترك.</span></div></li>
+          </ul>
+        </article>
+        <article class="moment">
+          <h3>بعد المشاهدة</h3>
+          <ul>
+            <li><i data-icon="route"></i><div><b>سجلّ الإنجاز</b><span>أين توقّفت، وما أتممته، وتقدّمك في كل سلسلة — وتستورد قائمة تشغيل كاملة لتتابعها.</span></div></li>
+            <li><i data-icon="shuffle"></i><div><b>المراجعة</b><span>مقتبسات مقترحة لتراجعها، وفقرات من كنّاشتك لتقرأها، ومقتبسات كل مادة متتابعة.</span></div></li>
+            <li><i data-icon="chart"></i><div><b>الإحصاءات</b><span>تقارير دراستك ونشرك، مع نصائح بحسب ما تفعل.</span></div></li>
+          </ul>
+        </article>
+        <article class="moment">
+          <h3>حين تنشر</h3>
+          <ul>
+            <li><i data-icon="film"></i><div><b>الاستوديو</b><span>قصّ بالنص، وترجمة على المقطع، وأبعاد الريلز، وقوالب وأغلفة، ومقدّمة وخاتمة.</span></div></li>
+            <li><i data-icon="send"></i><div><b>قنوات تليجرام</b><span>نشر فوري أو مجدول بقالب لكل قناة، وتقويم تسحب إليه المقتبسات.</span></div></li>
+            <li><i data-icon="cloud"></i><div><b>درايف ومستندات جوجل</b><span>كنّاشتك مستندات مرتّبة من اليمين لليسار، ومقتبساتك بروابط تُشارك.</span></div></li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
@@ -77,35 +98,172 @@
   <section class="sec gallery">
     <div class="wrap">
       <h2>نظرة من الداخل</h2>
-      <div class="tabs" role="tablist">
-        <button class="on" data-img="studio" type="button">الاستوديو</button>
-        <button data-img="series" type="button">السلاسل</button>
-        <button data-img="library" type="button">المقتبسات</button>
-        <button data-img="publish" type="button">النشر</button>
-        <button data-img="stats" type="button">الإحصاءات</button>
+      <div class="tabs" role="tablist" aria-label="أقسام المنصّة">
+        <button class="on" data-img="studio" type="button" role="tab" aria-selected="true">الاستوديو</button>
+        <button data-img="series" type="button" role="tab" aria-selected="false">السلاسل</button>
+        <button data-img="library" type="button" role="tab" aria-selected="false">المقتبسات</button>
+        <button data-img="publish" type="button" role="tab" aria-selected="false">النشر</button>
+        <button data-img="stats" type="button" role="tab" aria-selected="false">الإحصاءات</button>
       </div>
-      <div class="frame big"><img id="galImg" src="assets/shots/studio.webp" alt="لقطة من المقتبس"></div>
+      <div class="screen"><div class="screen-bar"><span></span><span></span><span></span></div><img id="galImg" src="assets/shots/studio.webp" alt="لقطة من المقتبس" width="1440" height="900" loading="lazy"></div>
     </div>
   </section>
 
-  <section id="install" class="sec">
-    <div class="wrap narrow">
-      <h2>التثبيت في دقيقتين</h2>
-      <p class="sub">المقتبس في مرحلة تجريبية، فيُثبَّت يدويًّا في متصفح كروم (أو أي متصفح مبني عليه مثل إيدج وبريف).</p>
+  <section id="install" class="sec install">
+    <div class="wrap">
+      <h2>التثبيت خطوة خطوة</h2>
+      <p class="sub">في هذه المرحلة التجريبية يُثبَّت المقتبس يدويًّا في كروم، أو في متصفح مبني عليه مثل إيدج وبريف. لا يستغرق أكثر من دقيقتين.</p>
+
       <ol class="steps">
-        <li><b>نزّل الملف وفكّ ضغطه</b><span>اضغط «نزّل المقتبس»، ثم فكّ ضغط الملف في مجلّد ثابت لا تحذفه (مثل مجلّد المستندات). سيظهر مجلّد باسم <code>almuqtabis</code>.</span></li>
-        <li><b>افتح صفحة الإضافات</b><span>اكتب في شريط العنوان:</span><code class="line">chrome://extensions</code></li>
-        <li><b>فعّل «وضع المطوّر»</b><span>من المفتاح في أعلى الصفحة.</span></li>
-        <li><b>اضغط «تحميل إضافة غير مضغوطة»</b><span>واختر مجلّد <code>almuqtabis</code> نفسه (المجلّد الذي فيه ملف <code>manifest.json</code>).</span></li>
-        <li><b>ثبّته في الشريط وابدأ</b><span>من أيقونة الأحجية بجانب شريط العنوان ثبّت المقتبس، ثم افتح أي محاضرة في يوتيوب — تجد زرّ المقتبس بجانب «أعجبني»، وفي المنصّة جولة تعريفية.</span></li>
+        <li class="step">
+          <div class="step-t">
+            <h3>نزّل الملف</h3>
+            <p>اضغط الزرّ، فيُحفظ ملف مضغوط في مجلّد «التنزيلات» على جهازك.</p>
+            <a class="btn primary sm" href="download/almuqtabis.zip" download><i data-icon="download"></i>نزّل المقتبس</a>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url">ghamine23.github.io/almuqtabis</div></div>
+              <div class="win-body pad">
+                <div class="dl">
+                  <i data-icon="zip"></i>
+                  <div class="dl-t"><b dir="ltr">almuqtabis.zip</b><div class="dl-bar"><span></span></div><small>اكتمل التنزيل</small></div>
+                  <em class="ok"><i data-icon="check"></i></em>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-t">
+            <h3>فكّ الضغط في مكان ثابت</h3>
+            <p>اضغط على الملف بالزرّ الأيمن واختر «استخراج هنا» أو «فكّ الضغط»، فيظهر مجلّد اسمه:</p>
+            <code class="line">almuqtabis</code>
+            <p class="small">انقله إلى مكان لن تحذفه، كمجلّد المستندات؛ فالإضافة تعمل من هذا المجلّد نفسه، ولو حُذف توقّفت.</p>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url plain">التنزيلات</div></div>
+              <div class="win-body files">
+                <div class="file"><i data-icon="zip"></i><span dir="ltr">almuqtabis.zip</span></div>
+                <div class="ctx"><span>فتح</span><span class="hi">استخراج هنا</span><span>نسخ</span><span>حذف</span></div>
+                <div class="file dir"><i data-icon="folder"></i><span dir="ltr">almuqtabis</span></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-t">
+            <h3>افتح صفحة الإضافات</h3>
+            <p>انسخ هذا العنوان والصقه في شريط العنوان أعلى كروم، ثم اضغط Enter:</p>
+            <button class="line copy" type="button" data-copy="chrome://extensions"><code>chrome://extensions</code><span>انسخ</span></button>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url typing" dir="ltr"><b>chrome://extensions</b><i class="caret"></i></div></div>
+              <div class="win-body ext">
+                <div class="ext-head"><span class="ext-title">الإضافات</span><span class="search"></span></div>
+                <div class="ext-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-t">
+            <h3>فعّل «وضع مطوّر البرامج»</h3>
+            <p>تجد مفتاحه في أعلى صفحة الإضافات. واسمه في الواجهة الإنجليزية:</p>
+            <code class="line">Developer mode</code>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url" dir="ltr">chrome://extensions</div></div>
+              <div class="win-body ext">
+                <div class="ext-head"><span class="ext-title">الإضافات</span><span class="search"></span><span class="dev ring"><small>وضع مطوّر البرامج</small><span class="tog"></span></span></div>
+                <div class="ext-cards"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-t">
+            <h3>اختر مجلّد المقتبس</h3>
+            <p>يظهر بعد التفعيل شريط فيه زرّ «تحميل إضافة غير مضغوطة»، واسمه في الواجهة الإنجليزية:</p>
+            <code class="line">Load unpacked</code>
+            <p>اضغطه، ثم اختر مجلّد <b dir="ltr">almuqtabis</b> نفسه — وهو المجلّد الذي تجد في داخله ملف:</p>
+            <code class="line">manifest.json</code>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url" dir="ltr">chrome://extensions</div></div>
+              <div class="win-body ext">
+                <div class="ext-head"><span class="ext-title">الإضافات</span><span class="search"></span><span class="dev"><small>وضع مطوّر البرامج</small><span class="tog on"></span></span></div>
+                <div class="ext-tools"><span class="tool ring">تحميل إضافة غير مضغوطة</span><span class="tool">حزم الإضافة</span><span class="tool">تحديث</span></div>
+                <div class="picker">
+                  <div class="picker-h">اختر مجلّدًا</div>
+                  <div class="picker-row"><i data-icon="folder"></i><span dir="ltr">Downloads</span></div>
+                  <div class="picker-row sel"><i data-icon="folder"></i><span dir="ltr">almuqtabis</span></div>
+                  <div class="picker-row"><i data-icon="folder"></i><span dir="ltr">Pictures</span></div>
+                  <div class="picker-a"><span class="pbtn">إلغاء</span><span class="pbtn on">اختيار</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-t">
+            <h3>ثبّته في شريط الأدوات</h3>
+            <p>اضغط أيقونة الأحجية بجانب شريط العنوان، ثم الدبّوس بجانب «المقتبس» ليبقى ظاهرًا. الضغط عليه يفتح منصّتك، وفيها جولة تعريفية قصيرة.</p>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url"></div><i class="tb-ic ring" data-icon="puzzle"></i></div>
+              <div class="win-body menu">
+                <div class="menu-pop">
+                  <div class="menu-h">الإضافات</div>
+                  <div class="menu-row"><img src="assets/mark.svg" alt=""><span>المقتبس</span><i class="pin ring" data-icon="pin"></i></div>
+                  <div class="menu-row dim"><span class="blob"></span><span class="bar"></span><i data-icon="pin"></i></div>
+                  <div class="menu-row dim"><span class="blob"></span><span class="bar s"></span><i data-icon="pin"></i></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="step">
+          <div class="step-t">
+            <h3>افتح محاضرة وابدأ</h3>
+            <p>تحت أي محاضرة في يوتيوب تجد زرّ «المقتبس» بجانب «أعجبني»؛ تضغطه فتظهر لوحته: الإضافة إلى سجلّ الدراسة، والدفتر، والاقتباس، ووضع التركيز.</p>
+          </div>
+          <div class="mock" aria-hidden="true">
+            <div class="win">
+              <div class="win-bar"><span></span><span></span><span></span><div class="url" dir="ltr">youtube.com/watch</div></div>
+              <div class="win-body yt"><img src="assets/shots/ytbar.png" alt=""></div>
+            </div>
+          </div>
+        </li>
       </ol>
-      <div class="cta center">
-        <a class="btn primary" href="download/almuqtabis.zip" download>
-          <svg viewBox="0 0 24 24"><path d="M12 4v11M7 10.5l5 5 5-5M5 19.5h14"/></svg>
-          نزّل المقتبس
-        </a>
+
+      <div class="update">
+        <i data-icon="refresh"></i>
+        <div><b>للتحديث إلى إصدار جديد</b><p>نزّل الملف وفكّ ضغطه مكان المجلّد القديم، ثم اضغط زرّ التحديث (السهم الدائري) على بطاقة المقتبس في صفحة الإضافات. تبقى بياناتك كما هي.</p></div>
       </div>
-      <p class="hint">للتحديث: نزّل الإصدار الجديد وضع مجلّده مكان القديم، ثم اضغط زرّ التحديث على بطاقة المقتبس في صفحة الإضافات — تبقى بياناتك كما هي.</p>
+    </div>
+  </section>
+
+  <section id="faq" class="sec faq">
+    <div class="wrap narrow">
+      <h2>قبل أن تبدأ</h2>
+      <details><summary>هل المقتبس مجّاني؟</summary><p>نعم، مجّاني بالكامل.</p></details>
+      <details><summary>أين تُحفظ مقتبساتي وتدويناتي؟</summary><p>في متصفحك على جهازك. وإن ربطته بحساب جوجل حُفظت نسخة في درايف حسابك أنت، عبر سكربت تضعه في حسابك، فلا تمرّ بياناتك بخادم لغيرك.</p></details>
+      <details><summary>هل يلزمني حساب جوجل أو تليجرام؟</summary><p>لا. الاقتباس والتدوين والسجلّ والاستوديو تعمل دون أي ربط. والربط بجوجل للجدولة ودرايف والمستندات، والربط بتليجرام للنشر في قنواتك.</p></details>
+      <details><summary>هل يعمل على غير كروم؟</summary><p>يعمل على المتصفحات المبنية على كروم، كإيدج وبريف وفيفالدي وأوبرا. ولا يعمل حاليًّا على فايرفوكس ولا سفاري.</p></details>
+      <details><summary>ظهر لي تنبيه عن «وضع المطوّر» عند فتح كروم، فهل هذا طبيعي؟</summary><p>نعم. هذا تنبيه يظهر لكل إضافة مثبّتة يدويًّا، ويزول حين يُنشر المقتبس في متجر كروم إن شاء الله.</p></details>
+      <details><summary>واجهتني مشكلة، فماذا أفعل؟</summary><p>اضغط «أبلغ عن مشكلة» في الصفحة الرئيسية للمنصّة، أو اكتبها في صندوق الاقتراحات أسفل هذه الصفحة، فتصل مباشرة.</p></details>
     </div>
   </section>
 
@@ -120,20 +278,19 @@
           </div>
         </div>
         <form id="fbForm" novalidate>
-          <div class="kinds" role="radiogroup">
-            <label><input type="radio" name="kind" value="اقتراح" checked><span>💡 اقتراح</span></label>
-            <label><input type="radio" name="kind" value="ملاحظة"><span>📝 ملاحظة</span></label>
-            <label><input type="radio" name="kind" value="خطأ"><span>🐞 خطأ</span></label>
-            <label><input type="radio" name="kind" value="شكر"><span>🤍 شكر</span></label>
+          <div class="kinds" role="radiogroup" aria-label="نوع الرسالة">
+            <label><input type="radio" name="kind" value="اقتراح" checked><span>اقتراح</span></label>
+            <label><input type="radio" name="kind" value="ملاحظة"><span>ملاحظة</span></label>
+            <label><input type="radio" name="kind" value="خطأ"><span>مشكلة</span></label>
+            <label><input type="radio" name="kind" value="شكر"><span>شكر</span></label>
           </div>
-          <textarea name="msg" rows="5" placeholder="اكتب ملاحظتك…" required maxlength="3000"></textarea>
+          <textarea name="msg" rows="5" placeholder="اكتب ملاحظتك…" required maxlength="3000" aria-label="الملاحظة"></textarea>
           <div class="row">
-            <input name="name" placeholder="اسمك (اختياري)" maxlength="80">
-            <input name="contact" placeholder="وسيلة تواصل للرد (اختياري)" maxlength="120">
+            <input name="name" placeholder="اسمك (اختياري)" maxlength="80" aria-label="الاسم">
+            <input name="contact" placeholder="وسيلة تواصل للردّ (اختياري)" maxlength="120" aria-label="وسيلة التواصل">
           </div>
           <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button class="btn primary" type="submit">أرسل</button>
-          <p class="fb-st" id="fbSt" role="status"></p>
+          <div class="fb-a"><button class="btn primary" type="submit"><i data-icon="send"></i>أرسل</button><p class="fb-st" id="fbSt" role="status"></p></div>
         </form>
       </div>
     </div>
@@ -141,7 +298,7 @@
 </main>
 
 <footer class="foot">
-  <div class="wrap">
+  <div class="wrap foot-in">
     <img src="assets/mark.svg" alt="">
     <p>المقتبس — نسخة تجريبية. يعمل على جهازك، وبياناتك في متصفحك وحسابك وحدهما.</p>
   </div>
